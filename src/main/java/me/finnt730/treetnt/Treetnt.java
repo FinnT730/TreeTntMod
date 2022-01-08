@@ -5,6 +5,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagCollection;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,7 +40,7 @@ public class Treetnt {
     @SubscribeEvent
     public void ChangeHitLog(final BlockEvent.BreakEvent e) {
         float rng = new Random().nextFloat();
-        var Below = e.getWorld().getBlockState(e.getPos().below());
+        BlockState Below = e.getWorld().getBlockState(e.getPos().below());
         if(BlockTags.LOGS.contains(e.getState().getBlock()) && rng > new Random().nextFloat()) {
             e.getWorld().setBlock(e.getPos(), Blocks.TNT.defaultBlockState(), 3);
             Util.wrapThreadWithTaskName("placeAndRemoveRedstoneUnderTNT", () -> {
